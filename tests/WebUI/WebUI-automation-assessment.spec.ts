@@ -36,20 +36,20 @@ test('Sorting low to high', async ({ page }) => {
 test('Adding to cart,confirming and removing from cart', async ({ page }) => {
 
     await login(page);
-    await page.locator('[data-test="add-to-cart-sauce-labs-fleece-jacket"]').click();
-    await page.locator('[data-test="add-to-cart-sauce-labs-onesie"]').click();
-    await expect(page.locator('[data-test="shopping-cart-badge"]')).toHaveText('2');
+    await page.locator('[data-test="add-to-cart-sauce-labs-fleece-jacket"]').click(); // adding first item to cart
+    await page.locator('[data-test="add-to-cart-sauce-labs-onesie"]').click(); // adding second item to cart
+    await expect(page.locator('[data-test="shopping-cart-badge"]')).toHaveText('2'); // verifying that 2 items are added to cart
 
     await test.step('Go to cart and verify both products are added', async () => {
-        await page.locator('[data-test="shopping-cart-link"]').click();
-        await expect(page.locator('[data-test="inventory-item-name"]')).toContainText(['Sauce Labs Fleece Jacket', 'Sauce Labs Onesie']);
+        await page.locator('[data-test="shopping-cart-link"]').click(); // navigating to cart page
+        await expect(page.locator('[data-test="inventory-item-name"]')).toContainText(['Sauce Labs Fleece Jacket', 'Sauce Labs Onesie']); // verifying that both products are present in the cart
     });
 
     await test.step('Remove one product and verify the cart is updated', async () => {
-        await page.locator('[data-test="remove-sauce-labs-onesie"]').click();
-        await expect(page.locator('[data-test="shopping-cart-badge"]')).toHaveText('1');
+        await page.locator('[data-test="remove-sauce-labs-onesie"]').click(); // removing one item from cart
+        await expect(page.locator('[data-test="shopping-cart-badge"]')).toHaveText('1'); // verifying that 1 item is in the cart
         await expect(page.locator('[data-test="inventory-item-name"]')).toContainText('Sauce Labs Fleece Jacket');
-        await expect(page.locator('[data-test="inventory-item-name"]')).not.toContainText('Sauce Labs Onesie');
+        await expect(page.locator('[data-test="inventory-item-name"]')).not.toContainText('Sauce Labs Onesie');// verifying that the removed item is no longer in the cart
 
     });
 });
