@@ -25,7 +25,7 @@ test('Login with valid credentials', async ({ page }) => {
 test('Sorting low to high', async ({ page }) => {
 
     await login(page);
-    // await page.click('.product_sort_container'); no need - > selectOtion will do the work 
+    // await page.click('.product_sort_container'); no need - > selectOption will do the work 
     await page.locator('[data-test="product-sort-container"]').selectOption('lohi');
     await expect(page.locator('[data-test="product-sort-container"]')).toHaveValue('lohi');
     // I'm using data-test attribute to locate the dropdown, and selectOption to select the "Price (low to high)" option, which has the value "lohi"
